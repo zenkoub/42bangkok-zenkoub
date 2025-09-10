@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <title>Calc</title>
+  </head>
+  <body>
+    <style>
+      button {
+        font-weight: inherit;
+        line-height: inherit;
+        color: inherit;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border-width: 0;
+        border-style: solid;
+        background-color: inherit;
+        cursor: pointer;
+        font-size: 2rem;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        background-color: #31a342;
+        color: white;
+        transition: all 0.125s;
+      }
+
+      button:hover {
+        background-color: #2d963d;
+      }
+
+      button:active {
+        background-color: #288536;
+      }
+
+      input,
+      select {
+        font-weight: inherit;
+        line-height: inherit;
+        color: inherit;
+        margin: 0;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgba(0, 0, 0, 0.274);
+        background-color: inherit;
+        font-size: 2rem;
+        border-radius: 0.25rem;
+      }
+
+      .card {
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.064);
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .container {
+        width: 100%;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <div class="container">
+      <form class="card" id="calForm">
+        <input type="text" value="0" required id="val1" />
+        <select id="op">
+          <option value="+">+</option>
+          <option value="-">-</option>
+          <option value="*">*</option>
+          <option value="/">/</option>
+          <option value="%">%</option>
+        </select>
+        <input type="text" value="0" required id="val2" />
+        <button type="submit" id="calBtn">Try me!</button>
+      </form>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        const calForm = $("#calForm");
+        const val1 = $("#val1");
+        const val2 = $("#val2");
+        const op = $("#op");
+
+        setInterval(function () {
+          alert("Please, use me...");
+        }, 30000);
+
+        calForm.on("submit", function (event) {
+          event.preventDefault();
+
+          const value1 = val1.val();
+          const value2 = val2.val();
+          const opar = op.val();
+
+          if (value1 < 0 || value2 < 0 || isNaN(value1) || isNaN(value2)) {
+            alert("Error :(");
+            return;
+          }
+
+          if ((opar == "/" || opar == "%") && (value1 == 0 || value2 == 0)) {
+            alert("It's over 9000!");
+            return;
+          }
+
+          alert("Result : " + eval(`${value1} ${opar} ${value2}`));
+        });
+      });
+    </script>
+  </body>
+</html>

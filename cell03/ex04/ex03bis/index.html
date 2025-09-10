@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="todo.js"></script>
+    <title>TODO</title>
+  </head>
+  <body>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+      * {
+        font-family: "Roboto", sans-serif;
+      }
+
+      button {
+        font-weight: inherit;
+        line-height: inherit;
+        color: inherit;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border-width: 0;
+        border-style: solid;
+        background-color: inherit;
+        cursor: pointer;
+        transition: all 0.125s;
+      }
+
+      .addNewBtn {
+        border-radius: 0.25rem;
+        background-color: #31a342;
+        color: white;
+        padding: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .addNewBtn:hover {
+        background-color: #2d963d;
+      }
+
+      .addNewBtn:active {
+        background-color: #288536;
+      }
+
+      .todoItem {
+        border-radius: 0.25rem;
+        background-color: #eeeeee;
+        color: black;
+        padding: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .todoItem:hover {
+        background-color: #ce2929;
+        color: white;
+      }
+
+      .todoItem:active {
+        background-color: #bb2424;
+        color: white;
+      }
+
+      .container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      #ft_list {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 0.25rem;
+      }
+    </style>
+
+    <div class="container">
+      <div id="ft_list"></div>
+      <button class="addNewBtn" id="addBtn">New</button>
+    </div>
+  </body>
+</html>

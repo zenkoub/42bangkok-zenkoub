@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kokritne</title>
+    <script src="https://kit.fontawesome.com/64c9199a72.js" crossorigin="anonymous"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {  
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            min-height: 100vh;
+            min-width: 320px;
+            font-family: 'Courier New', Courier, monospace;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            background-image: url("./assetz/background.jpg");
+        }
+        .navbar {
+            display: flex;
+            position: fixed;
+            align-items: center;
+            width: 100%;
+            height: 70px;
+            z-index: 1;
+            background-color: rgb(0, 0, 0);
+            justify-content: space-between;
+        }
+        .text-shadow {
+            color: white;
+            text-shadow: 5px 5px 8px rgba(217, 217, 217, 0.7);
+        }
+        #navtext {
+            display: flex;
+            align-self: center;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            transition: 0.5s;
+            padding: 26px;
+        }
+        #navtext:hover {
+            background-color: rgb(74, 74, 74);
+        }
+        .navtext-container {
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+            padding-right: 30px;
+            height: 100%;
+        }
+        .home-icon {
+            line-height: 70px;
+            font-size: 20px;
+            color: white;
+            transition: 0.5s;
+            padding-left: 28px;
+            padding-right: 28px;
+        }
+        #contacttext {
+            color: black;
+            font-size: 25px;
+            transition: 0.5s;
+            padding-top: 5px;
+            padding-right: 5px;
+            padding-left: 5px;
+            border-radius: 5px;
+        }
+        #contacttext:hover {
+            color: white;
+            background-color: black;
+        }
+        .home-icon:hover {
+            background-color: rgb(74, 74, 74);
+        }
+        .navtext-container.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 70px;
+            right: 0;
+            background-color: rgb(0, 0, 0);
+            width: 100%;
+            text-align: center;
+            gap: 0;
+            z-index: 1;
+        }
+        .navtext-container.active a {
+            padding: 10px 0;
+            width: 100%;
+        }
+        .hamburg {
+            display: none;
+            color: white;
+        }
+        .main-container {
+            display: flex;
+            color: black;
+            flex-direction: column;
+        }
+        .port-container {
+            display: flex;
+            margin-top: 80px;
+            background-color: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            scroll-margin-top: 80px;
+        }
+        .header {
+            text-align: left; 
+            margin-bottom: 25px;
+            line-height: .5;
+            margin-left: 30px;
+            font-family:'Courier New', Courier, monospace;
+            color:black;
+        }
+        .header img {
+            width: 300px;
+            position: relative;
+            overflow: hidden;
+            height: 450px;
+            object-fit: cover;
+            z-index: -1;
+            border-radius: 10px;
+        }
+        .skill_issues {
+            background-image: url("./assetz/black.jpg");
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 40vh;
+            min-width: 100vw;
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            flex-direction: column;
+            scroll-margin-top: 70px;
+
+        }
+        .skill_container {
+            display: flex;
+            flex-direction: row;
+            gap: 70px;
+            margin-bottom: 50px;
+        }
+        .skill_container img{
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            box-shadow: 5px 5px 5px gray;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .skill_container a {
+            display: flex;
+            font-size: 1em;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .experience {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-container {
+            width: 50vw;
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 40px;
+            border-radius: 10px;
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            transition: opacity 1s;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .prev, .next {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            padding-left: 10px;
+            margin-left: 12px;
+            margin-right: 10px;
+            padding-right: 12px;
+            cursor: pointer;
+            border-radius: 20%;
+            transition: 0.5s;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .contact-bar {
+            display: flex;
+            padding-bottom: 20px;
+            width: 100%;
+            background-color: rgb(30, 30, 30);
+            color: white;
+            display: flex;
+            justify-content: left;
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items:left;
+            text-align: left;
+            gap: 7px;
+            padding-top: 15px;
+            padding-left: 40px;
+        }
+        
+        .contact-item {
+            margin: 5px 0; 
+        }
+        
+        .contact-item i {
+            margin-right: 8px;
+        }
+        
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        
+        @media screen and (max-width: 740px) {
+            .skill_container img{
+            width: 60px;
+            height: 60px;
+            }
+            .skill_container a {
+            display: flex;
+            font-size: 0.8em;
+            flex-direction: column;
+            align-items: center;
+            }
+
+        }
+        @media screen and (max-width: 640px) {
+            .skill_container img{
+                width: 60px;
+                height: 60px;
+            }
+            .navtext-container {
+                display: none;
+                flex-direction: column;
+                opacity: 0;
+                transform: translateY(-20px); 
+                transition: opacity 0.5s ease, transform 0.5s ease;
+            }
+
+            .navtext-container.active {
+                display: flex;
+                opacity: 1;
+                transform: translateY(0); 
+            }
+            
+            .navtext-container.active a {
+                display: flex;
+                justify-content: end;
+                background-color: black;
+            }
+
+            .header img {
+                width: 50vw;
+                height: 50vh;
+                position: relative;
+                overflow: hidden;
+                object-fit: cover;
+                z-index: -1;
+                border-radius: 10px;
+            }
+
+            #navtext {
+                border-radius: 0px;
+                padding-right: 70px;
+            }
+
+            .header {
+                font-size: 3vw;
+                
+            }
+            
+            .hamburg {
+                display: block;
+                transition: 0.5s;
+                padding: 25px;
+            }
+
+            .hamburg:hover {
+                background-color: rgb(74, 74, 74);
+            }
+        }
+        @media screen and (max-width: 440px) {
+            .header img {
+                width: 50vw;
+                height: 35vh;
+                position: relative;
+                overflow: hidden;
+                object-fit: cover;
+                z-index: -1;
+                border-radius: 10px;
+            }
+        }
+        @media screen and (max-width: 320px) {
+            .skill_container img{
+                width: 50px;
+                height: 50px;
+            }
+
+            .skill_container {
+                gap: 20px;
+            }
+        }
+        @media screen and (max-width: 240px) {
+            .header img {
+                width: 60vw;
+                height: 30vh;
+                position: relative;
+                overflow: hidden;
+                object-fit: cover;
+                z-index: -1;
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="navbar" id="navbar">
+            <a class="home-icon" href="./home.html">
+                <i class="fa-solid fa-house"></i>
+            </a>
+            <div class="hamburg" onclick="handleHamburger()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="navtext-container" id="nav-menu">
+                <a id="navtext" href="#profile" onclick="handleHamburger()">Profile</a>
+                <a id="navtext" href="#skills" onclick="handleHamburger()">Skills</a>
+                <a id="navtext" href="#experience" onclick="handleHamburger()">Experience</a>
+                <a id="navtext" href="#contact-bar" onclick="handleHamburger()">Contact</a>
+            </div>
+        </div>
+
+        <div id="profile" class="port-container">
+            <div class="header">
+                <h1 style="font-style: italic;">kokritne</h1>
+                <p>#funwithcodingsep2024</p>
+                <img src="./assetz/profile.jpg">
+                <h1>Koobun Kritnetithat</h1>
+                <p>2nd Year Student</p>
+                <p>School of Information Technology KMITL</p>
+                <div class="contact" id="contact">
+                    <a id="contacttext" href="https://www.instagram.com/zenkoub/"><i class="fa-brands fa-instagram"></i></a>
+                    <a id="contacttext" href="https://www.facebook.com/profile.php?id=100006579403577"><i class="fa-brands fa-facebook"></i></a>
+                    <a id="contacttext" href="https://github.com/zenkoub"><i class="fa-brands fa-github"></i></a>
+                    <a id="contacttext" href="mailto:66070024@kmitl.ac.th"><i class="fa-solid fa-at"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div id="skills" class="skill_issues">
+            <h1 class="text-shadow">SKILLS</h1>
+            <div class="skill_container">
+                <a style="width: 80px;"><img src="https://static-00.iconduck.com/assets.00/javascript-js-icon-2048x2048-nyxvtvk0.png">
+                    <span>JavaScript</span>
+                </a>
+                <a><img style="background-color: white;" src="https://cdn-icons-png.flaticon.com/512/732/732212.png">
+                    <span>HTML</span>
+                </a>
+                <a><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJDwBd9LoQzBAZigXXxzQ0kKn6TwyrE0Y7Rg&s">
+                    <span>CSS</span>
+                </a>
+            </div>
+            <div class="skill_container">
+                <a><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS25oYJlp2wL_GAT2FOKBaOlCt1fbn56-hXDg&s">
+                    <span>C</span>
+                </a>
+                <a><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUmoRHovHXQ5JdGdOdt8fbfwIiHKB-ws3C-A&s">
+                    <span>Java</span>
+                </a>
+                <a><img style="background-color: white;" src="https://i0.wp.com/junilearning.com/wp-content/uploads/2020/06/python-programming-language.webp?fit=1920%2C1920&ssl=1">
+                    <span>Python</span>
+                </a>
+            </div>
+        </div>
+
+        <div id="experience" class="experience">
+            <div class="exptext">
+                <h1 style="padding-top:30px;">Experience</h1>
+                <p style="padding-top:10px;">IT CAMP 20 @IT.KMITL</p>
+                
+                <div class="carousel-container">
+                    <div class="carousel-slides" id="carouselSlidesCamp">
+                        <div class="carousel-slide">
+                            <img src="./assetz/itcamp3.jpg" alt="Image 1">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./assetz/itcamp4.jpg" alt="Image 2">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./assetz/itcamp2.jpg" alt="Image 3">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./assetz/itcamp1.jpg" alt="Image 4">
+                        </div>
+                    </div>
+                    <div class="carousel-buttons">
+                        <button class="prev" onclick="moveSlideCamp(-1)">&#10094;</button>
+                        <button class="next" onclick="moveSlideCamp(1)">&#10095;</button>
+                    </div>
+                </div>
+        
+                <p style="padding-top: 20px">English Debate by OIA KMITL</p>
+        
+                <div class="carousel-container">
+                    <div class="carousel-slides" id="carouselSlidesDebate">
+                        <div class="carousel-slide">
+                            <img src="./assetz/debate2.jpg" alt="Imaged1">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./assetz/debate4.jpg" alt="Imaged2">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./assetz/debate1.jpg" alt="Imaged3">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="./assetz/debate3.jpg" alt="Imaged4">
+                        </div>
+                    </div>
+                    <div class="carousel-buttons">
+                        <button class="prev" onclick="moveSlideDebate(-1)">&#10094;</button>
+                        <button class="next" onclick="moveSlideDebate(1)">&#10095;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+            <div class="contact-bar" id="contact-bar">
+                <div class="container">
+                    <div class="contact-item">
+                        <i class="fa-brands fa-instagram"></i>
+                        <a href="https://www.instagram.com/zenkoub/">zenkoub</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-brands fa-facebook"></i>
+                        <a href="https://www.facebook.com/profile.php?id=100006579403577">Zen Koobun</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-brands fa-github"></i>
+                        <a href="https://github.com/zenkoub">zenkoub</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-at"></i>
+                        <a href="mailto:66070024@kmitl.ac.th">66070024@kmitl.ac.th</a>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</body>
+    
+    <script>
+        const menu = document.getElementById("nav-menu");
+        function handleHamburger() {
+            let screenWidth = window.innerWidth;
+            if (screenWidth <= 640) {
+                menu.classList.toggle("active");
+            }
+        }
+        
+        function widthCheck() {
+            let screenWidth = window.innerWidth;
+            if (screenWidth > 640) {
+                menu.classList.remove("active");
+            }
+        }
+        window.addEventListener('resize', widthCheck);
+        widthCheck();
+
+        // Carousel
+        let currentIndexCamp = 0;
+        function showSlideCamp(index) {
+            const slidesCamp = document.querySelectorAll('#carouselSlidesCamp .carousel-slide');
+            const totalSlidesCamp = slidesCamp.length;
+
+            if (index >= totalSlidesCamp) {
+                currentIndexCamp = 0;
+            } else if (index < 0) {
+                currentIndexCamp = totalSlidesCamp - 1;
+            } else {
+                currentIndexCamp = index;
+            }
+
+            const offsetCamp = -currentIndexCamp * 100;
+            document.getElementById('carouselSlidesCamp').style.transform = `translateX(${offsetCamp}%)`;
+        }
+
+        function moveSlideCamp(step) {
+            document.getElementById('carouselSlidesCamp').style.transition = 'transform 0.5s ease-in-out';
+            showSlideCamp(currentIndexCamp + step);
+        }
+
+        showSlideCamp(currentIndexCamp);
+
+        let currentIndexDebate = 0;
+        function showSlideDebate(index) {
+            const slidesDebate = document.querySelectorAll('#carouselSlidesDebate .carousel-slide');
+            const totalSlidesDebate = slidesDebate.length;
+
+            if (index >= totalSlidesDebate) {
+                currentIndexDebate = 0;
+            } else if (index < 0) {
+                currentIndexDebate = totalSlidesDebate - 1;
+            } else {
+                currentIndexDebate = index;
+            }
+
+            const offsetDebate = -currentIndexDebate * 100;
+            document.getElementById('carouselSlidesDebate').style.transform = `translateX(${offsetDebate}%)`;
+        }
+
+        function moveSlideDebate(step) {
+            document.getElementById('carouselSlidesDebate').style.transition = 'transform 0.5s ease-in-out';
+            showSlideDebate(currentIndexDebate + step);
+        }
+
+        showSlideDebate(currentIndexDebate);
+      
+    </script>
+</html>
